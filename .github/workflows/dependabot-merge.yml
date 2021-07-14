@@ -31,7 +31,7 @@ jobs:
       - name: Dependabot Commenter
         if: |
           (github.event.label.name == 'merge') && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'dependabot-preview[bot]')
-        uses: peaceiris/actions-label-commenter@v1.9.1
+        uses: peaceiris/actions-label-commenter@v1.9.2
         with:
           github_token: ${{ secrets.OMNISHARP_BOT_TOKEN }}
           config_file: .github/label-commenter-dependabot.yml
