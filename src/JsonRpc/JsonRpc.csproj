@@ -14,7 +14,6 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
         <PackageReference Include="Newtonsoft.Json" />
         <PackageReference Include="MediatR" />
-        <PackageReference Include="System.IO.Pipelines" />
         <PackageReference Include="Nerdbank.Streams" />
         <PackageReference Include="System.Threading.Channels" />
         <PackageReference Include="DryIoc.Internal" PrivateAssets="All" />
