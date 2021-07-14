@@ -1,0 +1,53 @@
+@{
+	IDocument containingAssembly = Model.Get<IDocument>("ContainingAssembly");
+	if(containingAssembly != null)
+	{
+		<li class="header">Assembly</li>
+		<li>@Context.GetTypeLink(containingAssembly, false)</li>
+	}
+
+	IDocument containingNamespace = Model.Get<IDocument>("ContainingNamespace");
+	if(containingNamespace != null)
+	{
+		<li class="header">Namespace</li>
+		<li>@Context.GetTypeLink(containingNamespace, false)</li>
+	}
+
+	IDocument containingType = Model.Get<IDocument>("ContainingType");
+	if(containingType != null)
+	{
+		<li class="header">Type</li>
+		<li>@Context.GetTypeLink(containingType, false)</li>
+
+		<li role="separator" class="divider"></li>
+
+		IReadOnlyList<IDocument> constructors = containingType
+			.GetList<IDocument>("Constructors")
+			.Where(x => x.GetBool("IsResult"))
+			.ToList();
+		if(constructors != null && constructors.Count > 0)
+		{
+			<li class="header">Constructors</li>
+			foreach(IDocument constructor in constructors)
+			{
+				string selectedClass = constructor.GetString("SymbolId") == Model.GetString("SymbolId") ? "selected" : null;
+				<li class="@selectedClass">@Context.GetTypeLink(constructor, false)</li>
+			}
+		}
+
+		foreach(IGrouping<string, IDocument> memberGroup
+			in containingType.GetList<IDocument>("Members")
+				.Where(x => x.GetBool("IsResult"))
+				.GroupBy(x => x.GetString("Kind"))
+                .OrderBy(x => x.Key))
+		{
+			<li class="header">@memberGroup.Key Members</li>
+			foreach(IDocument member in memberGroup
+				.OrderBy(x => x.GetString("Name")))
+			{
+				string selectedClass = member.GetString("SymbolId") == Model.GetString("SymbolId") ? "selected" : null;
+				<li class="@selectedClass">@Context.GetTypeLink(member, false)</li>
+			}
+		}
+	}
+}

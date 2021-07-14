@@ -1,3 +1,8 @@
+Title: Source Generators
+ShowInSidebar: true
+Order: 4
+---
+
 # Source Generators
 We have built a few source generators to help with aid with implementing the plumbing of all the things.  The goals of using source generation this way is to ensure that errors and mistakes are avoided and don't cause issues.
 

@@ -1,0 +1,14 @@
+@foreach(IGrouping<string, IDocument> typeGroup 
+    in Outputs.FromPipeline(nameof(Statiq.Docs.Pipelines.Api))
+        .Where(x => x.GetBool("IsResult") && x["Kind"].Equals("NamedType") && x.GetDocument("ContainingAssembly") == Model)
+        .GroupBy(x => x.GetString("SpecificKind"))
+        .OrderBy(x => x.Key))
+{
+    @Html.Partial("Section\\_DocsTable", new DocsTable
+    {
+        Docs = typeGroup.OrderBy(x => x["DisplayName"]).ToList(),
+        Title = typeGroup.Key + " Types",
+        Header = typeGroup.Key,
+        HasSummary = true
+    });		
+}

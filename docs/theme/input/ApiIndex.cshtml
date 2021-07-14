@@ -1,0 +1,22 @@
+Title: API
+DestinationFileName: => Settings.GetPath(DocsKeys.ApiPath).Combine("index.html")
+---
+
+@section Search {
+    @Html.Partial("_ApiSearch")
+}
+
+@{
+    Layout = "/_Layout.cshtml";
+    @Html.Partial("Section\\_DocsTable", new DocsTable
+{
+    Docs = Outputs.FromPipeline(nameof(Statiq.Docs.Pipelines.Api))
+            .Where(x => x.GetString("Kind") == "Namespace")
+            .OrderBy(x => x.GetString("DisplayName"))
+            .ToList(),
+    Title = "Namespaces",
+    Header = "Namespace",
+    HasSummary = true,
+    LinkTypeArguments = false
+});
+}  

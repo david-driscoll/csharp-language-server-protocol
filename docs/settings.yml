@@ -1,0 +1,4 @@
+# solutionFiles:
+#   - ../../LSP.sln
+sourceFiles:
+  - ../../src/**/{!.git,!bin,!obj,!packages,!*.Tests,}/**/*.cs

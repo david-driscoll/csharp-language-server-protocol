@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="output\**" />
+    <EmbeddedResource Remove="output\**" />
+    <None Remove="output\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Statiq.CodeAnalysis" Version="1.0.0-beta.42" />
+    <PackageReference Include="Statiq.Docs" Version="1.0.0-alpha.2" />
+    <PackageReference Include="Statiq.Web" Version="1.0.0-beta.28" />
+  </ItemGroup>
+
+    <!-- <ItemGroup>
+        <ProjectReference Include="../../Statiq.Docs\src\Statiq.Docs\Statiq.Docs.csproj" />
+    </ItemGroup> -->
+
+</Project>

@@ -1,0 +1,13 @@
+@{
+	@Html.Partial("Section\\_DocsTable", new DocsTable
+	{
+		Docs = Model.GetList<IDocument>("Constructors")
+			?.Where(x => x.GetBool("IsResult"))
+			.OrderBy(x => x["DisplayName"])
+			.ToList(),
+		Title = "Constructors",
+		Header = "Name",
+		HasSummary = true,
+		LinkTypeArguments = false
+	});
+}

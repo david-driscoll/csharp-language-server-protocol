@@ -1,0 +1,13 @@
+@{
+    IDocument root = OutputPages[Document.Destination.ChangeFileName("index.html").FullPath].First();
+
+    // Display the menu
+    DocumentList<IDocument> children = OutputPages.GetChildrenOf(root)
+        .Where(x => x.GetBool(SamsonKeys.ShowInSidebar))
+        .ToDocumentList();
+
+    if(children != null && children.Count > 0)
+    {
+		@Html.Partial("Sidebar/_ChildPagesMenu", children)
+	}
+}

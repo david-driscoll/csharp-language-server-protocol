@@ -1,0 +1,13 @@
+<li class="header">Assemblies</li>   
+@{
+    IReadOnlyList<IDocument> assemblies =
+        Outputs.FromPipeline(nameof(Statiq.Docs.Pipelines.Api))
+            .Where(x => x.GetString("Kind") == "Assembly")
+            .OrderBy(x => x.GetString("DisplayName"))
+            .ToList();
+    foreach(IDocument assembly in assemblies)
+    {
+        string selectedClass = assembly.GetString("SymbolId") == Model.GetString("SymbolId") ? "selected" : null;
+        <li class="@selectedClass">@Context.GetTypeLink(assembly, false)</li>
+    }
+}

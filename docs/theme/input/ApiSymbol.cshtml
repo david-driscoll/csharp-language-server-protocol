@@ -1,0 +1,7 @@
+Enumerate: => Outputs.FromPipeline(nameof(Statiq.Docs.Pipelines.Api))
+DestinationFileName: => Document.GetDocument("Current")["Destination"]
+---
+
+@{
+    Layout = "/_ApiLayout.cshtml";
+}

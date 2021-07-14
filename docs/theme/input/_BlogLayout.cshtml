@@ -1,0 +1,47 @@
+@{
+	Layout = "/_Layout.cshtml";
+}
+
+@section Sidebar {
+    @if(Documents[Docs.BlogPosts].Any(x => x.ContainsKey(SamsonKeys.Category)))
+    {
+        <li class="header"><i class="fa fa-bookmark"></i> Categories</li>    
+        @foreach(string category in Documents[Docs.BlogPosts]
+            .Select(x => x.String(SamsonKeys.Category))
+            .Distinct()
+            .OrderBy(x => x))
+        {
+            string link = category.Replace(" ", "-").Replace("'", string.Empty);
+            string selected = Model.String(Keys.RelativeFilePath).StartsWith($"{Context.String(SamsonKeys.BlogPath)}/{link}/") ? "selected" : null;
+            <li class="@selected"><a href="@Context.GetLink($"/{Context.String(SamsonKeys.BlogPath)}/{link}")">@category</a></li>
+        }
+    }
+    
+    <li class="header"><i class="fa fa-calendar"></i> Archive</li>    
+    @foreach(DateTime published in Documents[Docs.BlogPosts]
+        .Select(x => x.Get<DateTime>(SamsonKeys.Published))
+        .Select(x => new DateTime(x.Year, x.Month, 1))
+        .Distinct()
+        .OrderByDescending(x => x))
+    {
+        string link = published.ToString("yyyy/MM");
+        string selected = Model.String(Keys.RelativeFilePath).StartsWith($"{Context.String(SamsonKeys.BlogPath)}/archive/{link}/") ? "selected" : null;
+        <li class="@selected"><a href="@Context.GetLink($"/{Context.String(SamsonKeys.BlogPath)}/archive/{link}")">@(published.ToString("MMMM, yyyy"))</a></li>
+    }
+    
+    @if(Documents[Docs.BlogPosts].Any(x => x.ContainsKey(SamsonKeys.Author)))
+    {
+        <li class="header"><i class="fa fa-user"></i> Authors</li>    
+        @foreach(string author in Documents[Docs.BlogPosts]
+            .Select(x => x.String(SamsonKeys.Author))
+            .Distinct()
+            .OrderBy(x => x))
+        {
+            string link = author.Replace(" ", "-").Replace("'", string.Empty);
+            string selected = Model.String(Keys.RelativeFilePath).StartsWith($"{Context.String(SamsonKeys.BlogPath)}/author/{link}/") ? "selected" : null;
+            <li class="@selected"><a href="@Context.GetLink($"/{Context.String(SamsonKeys.BlogPath)}/author/{link}")">@author</a></li>
+        }
+    }
+}
+
+@RenderBody()

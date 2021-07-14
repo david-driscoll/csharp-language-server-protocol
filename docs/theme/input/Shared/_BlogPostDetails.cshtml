@@ -1,0 +1,18 @@
+@model IDocument
+
+<dl class="dl-horizontal" style="margin-bottom: 12px;">
+    <dt style="text-align: left;"><i class="fa fa-calendar"></i> Published</dt>
+    <dd>@(Model.Get<DateTime>(SamsonKeys.Published).ToLongDateString(Context))</dd>
+    @if(Model.ContainsKey(SamsonKeys.Category))
+    {
+        string link = Model.String(SamsonKeys.Category).Replace(" ", "-").Replace("'", string.Empty);
+        <dt style="text-align: left;"><i class="fa fa-bookmark"></i> Category</dt>
+        <dd><a href="@Context.GetLink($"/{Context.String(SamsonKeys.BlogPath)}/{link}")">@(Model.String(SamsonKeys.Category))</a></dd>
+    }    
+    @if(Model.ContainsKey(SamsonKeys.Author))
+    {
+        string link = Model.String(SamsonKeys.Author).Replace(" ", "-").Replace("'", string.Empty);
+        <dt style="text-align: left;"><i class="fa fa-user"></i> Author</dt>
+        <dd><a href="@Context.GetLink($"/{Context.String(SamsonKeys.BlogPath)}/author/{link}")">@(Model.String(SamsonKeys.Author))</a></dd>
+    }  
+</dl>

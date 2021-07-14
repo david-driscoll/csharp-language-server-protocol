@@ -1,3 +1,8 @@
+Title: Language Server Protocol
+ShowInSidebar: true
+Order: 1
+---
+
 # Implementing the Language Server Protocol
 
 The goal of this library is to implement [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) as closely as possible

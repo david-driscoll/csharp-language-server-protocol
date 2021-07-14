@@ -1,0 +1,44 @@
+@inherits Statiq.Razor.StatiqRazorPage<DocumentList<IDocument>>
+
+@{
+    // Group by category
+    IList<IGrouping<string, IDocument>> categoryGroups = Model
+        .GroupBy(x => x.GetString(SamsonKeys.Category))
+        .OrderBy(x => x.Key)
+        .ToList();
+    foreach (IGrouping<string, IDocument> categoryGroup in categoryGroups)
+    {
+        if (!string.IsNullOrWhiteSpace(categoryGroup.Key))
+        {
+            <li class="header">@categoryGroup.Key</li>
+        }
+
+        // Iterate documents in this category
+        foreach (IDocument child in categoryGroup
+            .Where(x => x.GetBool(SamsonKeys.ShowInSidebar, true))
+            .OrderBy(x => x.Get<int>(SamsonKeys.Order, 1000))
+            .ThenBy(x => x.WithoutSettings().GetString(Keys.Title)))
+        {
+            // TODO: this doesn't take into account if a child is active.
+            string? parentActive = Document.IdEquals(child) ? "active" : null;
+            string? childSelected = Document.IdEquals(child) ? "selected" : null;
+            string childTitle = child.GetTitle();
+            IReadOnlyList<IDocument> children = child.GetDocumentList(Keys.Children);
+            if (children != null && children.Count > 0)
+            {
+                // Parent
+                <li class="treeview @parentActive @childSelected">
+                    <a href="@Context.GetLink(child)">@childTitle</a> <a href="#" class="expand"></a>
+                    <ul class="treeview-menu">
+                        @Html.Partial("Sidebar/_ChildPagesMenu", children)
+                    </ul>
+                </li>
+            }
+            else
+            {
+                // Leaf
+                <li class="@childSelected"><a href="@Context.GetLink(child)">@childTitle</a></li>
+            }
+        }
+    }
+}
