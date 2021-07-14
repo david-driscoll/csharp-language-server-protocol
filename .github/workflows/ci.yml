@@ -45,15 +45,15 @@ jobs:
         run: |
           git fetch --prune
       - name: 🔨 Use .NET Core 2.1 SDK
-        uses: actions/setup-dotnet@v1.7.2
+        uses: actions/setup-dotnet@v1.8.1
         with:
           dotnet-version: '2.1.x'
       - name: 🔨 Use .NET Core 3.1 SDK
-        uses: actions/setup-dotnet@v1.7.2
+        uses: actions/setup-dotnet@v1.8.1
         with:
           dotnet-version: '3.1.x'
       - name: 🔨 Use .NET Core 5.0 SDK
-        uses: actions/setup-dotnet@v1.7.2
+        uses: actions/setup-dotnet@v1.8.1
         with:
           dotnet-version: '5.0.x'
       - name: 🎁 dotnet tool restore
