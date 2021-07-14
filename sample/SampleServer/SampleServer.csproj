@@ -21,7 +21,7 @@
         <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
         <PackageReference Include="System.IO.Pipelines" Version="4.7.3" />
-        <PackageReference Include="Nerdbank.Streams" Version="2.6.81" />
+        <PackageReference Include="Nerdbank.Streams" Version="2.7.74" />
     </ItemGroup>
 
 </Project>
