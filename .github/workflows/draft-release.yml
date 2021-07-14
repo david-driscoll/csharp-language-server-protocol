@@ -18,18 +18,18 @@ jobs:
         run: git fetch --prune
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.9
+        uses: gittools/actions/gitversion/setup@v0.9.10
         with:
           versionSpec: '5.x'
 
       - name: Install GitReleaseManager
-        uses: gittools/actions/gitreleasemanager/setup@v0.9.9
+        uses: gittools/actions/gitreleasemanager/setup@v0.9.10
         with:
           versionSpec: '0.11.x'
 
       - name: Use GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.9
+        uses: gittools/actions/gitversion/execute@v0.9.10
 
       - name: Create Milestone
         uses: WyriHaximus/github-action-create-milestone@v1
