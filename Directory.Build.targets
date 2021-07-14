@@ -38,7 +38,7 @@
         <PackageReference Update="coverlet.msbuild" Version="3.0.3"/>
         <PackageReference Update="System.Reactive" Version="4.4.1"/>
         <PackageReference Update="System.Collections.Immutable" Version="1.7.1"/>
-        <PackageReference Update="System.Threading.Channels" Version="4.7.1"/>
+        <PackageReference Update="System.Threading.Channels" Version="5.0.0"/>
         <PackageReference Update="Microsoft.Reactive.Testing" Version="4.4.1"/>
         <PackageReference Update="MediatR" Version="8.1.0"/>
         <PackageReference Update="Bogus" Version="33.0.2"/>
